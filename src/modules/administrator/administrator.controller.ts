@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service.js';
 import  Request  from 'express';
 import { AdministratorService } from './administrator.service.js';
+
 
 @Controller('administrator')
 export class AdministratorController {   
