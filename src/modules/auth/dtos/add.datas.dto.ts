@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsNotEmpty, IsString, Matches } from "class-validator";
 
-export class AddAdministratorsDto{
+export class AddDatasDto{
     @ApiProperty({ example: "Slobodan", description: "Enter first name"})
     @IsNotEmpty()
     @IsString()
@@ -28,6 +28,4 @@ export class AddAdministratorsDto{
     @IsString()
     @Matches(/^\+[0-9]{3}6[0-9]*$/, {message: "Phone number is in wrong formate"})
     phoneNumber
-
-
 }
