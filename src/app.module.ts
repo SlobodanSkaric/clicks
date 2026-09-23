@@ -14,5 +14,7 @@ import { AdministratorModule } from './modules/administrator/administrator.modul
     AdministratorModule
   ],
   providers: [],
+
+  
 })
 export class AppModule {}

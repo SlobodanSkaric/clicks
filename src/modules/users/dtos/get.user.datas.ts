@@ -1,4 +1,4 @@
-export class ResponseAdministratoDto{
+export class ResponseUsersoDto{
     id: string;
     firstName: string;
     lastName: string;

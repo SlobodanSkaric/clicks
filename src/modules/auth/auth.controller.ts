@@ -13,8 +13,10 @@ import { AddDatasDto } from './dtos/add.datas.dto.js';
 export class AuthController {
     constructor(private readonly authService: AuthService){}
 
-    @Post("add")
+    @Post("add/user")
     @ApiOperation({ summary: "Add Users" })
+    @ApiResponse({ status: 200, description: "User add success" })
+    @ApiResponse({ status: 500,  description: "Internal server error" })
     async addUser(@Body() data: AddDatasDto):Promise<boolean | ApiResponseCustom>{
         const result = await this.authService.addUsers(data);
         if(result instanceof ApiResponseCustom){
@@ -24,9 +26,10 @@ export class AuthController {
         return true;
     }
 
-    @Post("add")
+    @Post("add/administrator")
     @ApiOperation({summary: "Add Adminstrator"})
     @ApiResponse({status:201, description:"Add administrator is success"})
+    @ApiResponse({ status: 500,  description: "Internal server error" })
     async addAdminstrator(@Body() data: AddDatasDto): Promise<boolean | ApiResponseCustom>{
         const result = await this.authService.addAdministrator(data);
         if(result instanceof ApiResponseCustom){
@@ -38,6 +41,8 @@ export class AuthController {
 
     @Post("login")
     @ApiOperation({ summary: "Login" })
+    @ApiResponse({status:201, description:"Add administrator is success"})
+    @ApiResponse({ status: 500,  description: "Internal server error" })
     async userLogin(@Body()data: AuthLoginDto, @Req()request: Request, @Res({ passthrough: true }) res: Response): Promise<{ } | ApiResponseCustom> {
         const result = await this.authService.login(data, request);
 
@@ -64,6 +69,7 @@ export class AuthController {
 
     @Get("logout")
     @ApiOperation({ summary: "Logout" })
+    @ApiResponse({ status: 200, description: "Logout success" })
     async logout(@Res({ passthrough:true }) res: Response):Promise<{messges: string}>{
         res.clearCookie("access_cookies");
         res.clearCookie("refresh_cookies");
