@@ -4,6 +4,7 @@ import { AppModule } from './app.module.js';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import cookieParser from 'cookie-parser';
+import { HttpExceptionsFilter } from './common/filters/htt.exceptions.filter.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,6 +30,8 @@ async function bootstrap() {
 
   const server = app.getHttpAdapter().getInstance();
   server.set("trust proxy", true);
+
+  app.useGlobalFilters(new HttpExceptionsFilter());
  await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
